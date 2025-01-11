@@ -2,6 +2,10 @@ import { Layout } from "../containers/Layout";
 
 export const PrivateRouteList = [
   {
+    path: "/",
+    element: <Layout />,
+  },
+  {
     path: "/layout",
     element: <Layout />,
   },

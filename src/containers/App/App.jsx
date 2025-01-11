@@ -1,18 +1,15 @@
 import React from "react";
 import MainRoutingComponent from "../../routes/MainRoutingComponent";
 import { AppLayoutWrapper } from "./style";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import useAppHooks from "./useAppHooks";
 const App = () => {
-  // Create a client
-  const queryClient = new QueryClient();
+  // this hooks fetch api and provides data,loader and error
+  const { loginResponse, loginLoader, isErrorLoading } = useAppHooks();
   return (
     // Provide the client to your App
-    <QueryClientProvider client={queryClient}>
-      <AppLayoutWrapper>
-        App
-        <MainRoutingComponent />
-      </AppLayoutWrapper>
-    </QueryClientProvider>
+    <AppLayoutWrapper>
+      <MainRoutingComponent />
+    </AppLayoutWrapper>
   );
 };
 
