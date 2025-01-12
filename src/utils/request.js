@@ -50,13 +50,11 @@ function parseJSON(response, callback) {
 async function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     if (response?.errorcode === 12) {
-      sendMessageToParent();
     }
     return response;
   }
 
   if (response.status === 401) {
-    sendMessageToParent();
   }
 
   const error = new Error();
