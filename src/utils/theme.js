@@ -4,6 +4,9 @@ export const defaultTheme = {
     theme: "#376AF5",
     primaryColor: "#ffffff",
     fontColor: "red",
+    hoverBgColor: "#1d4ed8",
+    disabledBgColor: "#93c5fd",
+    backgroundColor: "#2563eb",
   },
   fontSize: {
     xsmall: "12px",

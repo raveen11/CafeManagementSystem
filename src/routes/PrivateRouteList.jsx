@@ -1,4 +1,5 @@
 import { Layout } from "../containers/Layout";
+import Login from "../containers/Login";
 
 export const PrivateRouteList = [
   {
@@ -8,6 +9,10 @@ export const PrivateRouteList = [
   {
     path: "/layout",
     element: <Layout />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/home",
