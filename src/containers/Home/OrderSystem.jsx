@@ -1,0 +1,76 @@
+import React, { useRef } from "react";
+import { Table, Button } from "antd";
+import { PrinterOutlined } from "@ant-design/icons";
+
+const OrderSystem = ({ selectedTable }) => {
+  const printRef = useRef(null);
+
+  const handlePrint = () => {
+    const printContent = printRef.current;
+    const originalBody = document.body.innerHTML;
+
+    document.body.innerHTML = printContent.innerHTML;
+    window.print();
+
+    document.body.innerHTML = originalBody;
+    window.location.reload(); // Reload to restore event listeners
+  };
+
+  // Calculate the total of all order items
+  const totalSum = selectedTable
+    ? selectedTable.orderItems.reduce((sum, item) => sum + item.total, 0)
+    : 0;
+
+  const columns = [
+    { title: "Food Item", dataIndex: "name", key: "name" },
+    { title: "Quantity", dataIndex: "quantity", key: "quantity" },
+    {
+      title: "Price per Item",
+      dataIndex: "price",
+      key: "price",
+      render: (price) => `$${price.toFixed(2)}`,
+    },
+    {
+      title: "Total Price",
+      dataIndex: "total",
+      key: "total",
+      render: (total) => `$${total.toFixed(2)}`,
+    },
+  ];
+
+  return (
+    <div>
+      {selectedTable && (
+        <>
+          {/* Print Button */}
+          <Button
+            type="primary"
+            icon={<PrinterOutlined />}
+            onClick={handlePrint}
+            style={{ marginBottom: 10 }}>
+            Print
+          </Button>
+
+          <div ref={printRef} className="print-area">
+            <Table
+              dataSource={selectedTable.orderItems.map((item, index) => ({
+                ...item,
+                key: index,
+              }))}
+              columns={columns}
+              pagination={false}
+              bordered
+              footer={() => (
+                <div style={{ textAlign: "right", fontWeight: "bold" }}>
+                  Grand Total: ${totalSum.toFixed(2)}
+                </div>
+              )}
+            />
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default OrderSystem;
